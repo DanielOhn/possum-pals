@@ -10,6 +10,7 @@ const ListPosts = () => {
             const res = await fetch("/posts");
             const data = await res.json();
             setPosts(data);
+            console.log(posts);
         } catch (err) {
             console.error(err.message);
         }
@@ -44,14 +45,13 @@ const ListPosts = () => {
                 method: "DELETE"
             });
 
-            console.log(deletePost);
-
-            setPosts(posts.filter(post => post.post_id !== id));
+            setPosts(posts.filter(post => post.id !== id));
 
         } catch (err) {
             console.error(err.message);
         }
     }
+
     useEffect(() => {
         getPosts();
     }, [])
@@ -70,16 +70,16 @@ const ListPosts = () => {
                 <tbody>
                     {posts.map(post => {
                         return (
-                            edit === post.post_id ?
-                                <tr key={post.post_id}>
+                            edit === post.id ?
+                                <tr key={post.id}>
                                     <td><input type="text" value={updateText} onChange={(e) => setUpdateText(e.target.value)}></input></td>
-                                    <td><button onClick={(e) => updatePost(e, post.post_id)}>Save</button></td>
-                                    <td><button onClick={() => deletePost(post.post_id)}>Delete</button></td>
+                                    <td><button onClick={(e) => updatePost(e, post.id)}>Save</button></td>
+                                    <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
                                 </tr> :
-                                <tr key={post.post_id}>
+                                <tr key={post.id}>
                                     <td>{post.text}</td>
-                                    <td><button onClick={() => editPost(post.post_id, post.text)}>Edit</button></td>
-                                    <td><button onClick={() => deletePost(post.post_id)}>Delete</button></td>
+                                    <td><button onClick={() => editPost(post.id, post.text)}>Edit</button></td>
+                                    <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
                                 </tr>)
                     })}
                 </tbody>

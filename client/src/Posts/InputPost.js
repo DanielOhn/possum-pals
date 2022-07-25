@@ -9,8 +9,9 @@ const InputPost = () => {
 
         try {
             const body = { text }
+            console.log(body)
 
-            const res = fetch('/posts', {
+            fetch('/posts', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -27,6 +28,7 @@ const InputPost = () => {
             <h1>Input Post</h1>
             <form onSubmit={onSubmitForm}>
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>
+                
                 <button>Add</button>
             </form>
         </Fragment>

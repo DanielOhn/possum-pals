@@ -1,8 +1,8 @@
 import './App.css';
-import { Fragment } from 'react';
 
-import InputPost from "./InputPost"
-import ListPosts from './ListPosts';
+import InputPost from "./Posts/InputPost"
+import ListPosts from './Posts/ListPosts';
+
 
 function App() {
   return (
