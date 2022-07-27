@@ -10,7 +10,7 @@ const ListPosts = () => {
             const res = await fetch("/posts");
             const data = await res.json();
             setPosts(data);
-            console.log(posts);
+            console.log(data);
         } catch (err) {
             console.error(err.message);
         }
@@ -23,13 +23,13 @@ const ListPosts = () => {
 
     const updatePost = async (e, id) => {
         e.preventDefault();
-        
+
         try {
             const body = { updateText }
 
             const res = await fetch(`/posts/${id}`, {
                 method: "PUT",
-                headers: { "Content-Type": 'application/json'},
+                headers: { "Content-Type": 'application/json' },
                 body: JSON.stringify(body)
             })
 
@@ -59,33 +59,45 @@ const ListPosts = () => {
     return (
         <>
             <h2>Posts</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Text</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {posts.map(post => {
-                        return (
-                            edit === post.id ?
-                                <tr key={post.id}>
-                                    <td><input type="text" value={updateText} onChange={(e) => setUpdateText(e.target.value)}></input></td>
-                                    <td><button onClick={(e) => updatePost(e, post.id)}>Save</button></td>
-                                    <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
-                                </tr> :
-                                <tr key={post.id}>
-                                    <td>{post.text}</td>
-                                    <td><button onClick={() => editPost(post.id, post.text)}>Edit</button></td>
-                                    <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
-                                </tr>)
-                    })}
-                </tbody>
-            </table>
+            <div>
+                {posts.map(post => {
+                    return(
+                    <div key={post.id}>
+                        <img src={process.env.REACT_APP_S3_URL + post.file} />
+                        <p>{post.text}</p>
+                    </div>
+                )})}
+            </div>
         </>
     )
 };
 
 export default ListPosts;
+
+
+
+// <table>
+//     <thead>
+//         <tr>
+//             <th>Text</th>
+//             <th>Edit</th>
+//             <th>Delete</th>
+//         </tr>
+//     </thead>
+//     <tbody>
+//         {posts.map(post => {
+//             return (
+//                 edit === post.id ?
+//                     <tr key={post.id}>
+//                         <td><input type="text" value={updateText} onChange={(e) => setUpdateText(e.target.value)}></input></td>
+//                         <td><button onClick={(e) => updatePost(e, post.id)}>Save</button></td>
+//                         <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
+//                     </tr> :
+//                     <tr key={post.id}>
+//                         <td>{post.text}</td>
+//                         <td><button onClick={() => editPost(post.id, post.text)}>Edit</button></td>
+//                         <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
+//                     </tr>)
+//         })}
+//     </tbody>
+// </table>
