@@ -58,13 +58,15 @@ const ListPosts = () => {
 
     return (
         <>
-            <h2>Posts</h2>
-            <div>
+            <div className="posts">
                 {posts.map(post => {
                     return(
-                    <div key={post.id}>
+                    <div className="post" key={post.id}>
                         <img src={process.env.REACT_APP_S3_URL + post.file} />
-                        <p>{post.text}</p>
+                        <div className="post-deets">
+                            <p>{post.text}</p>
+                            <small>{post.created}</small>
+                        </div>
                     </div>
                 )})}
             </div>
@@ -73,31 +75,3 @@ const ListPosts = () => {
 };
 
 export default ListPosts;
-
-
-
-// <table>
-//     <thead>
-//         <tr>
-//             <th>Text</th>
-//             <th>Edit</th>
-//             <th>Delete</th>
-//         </tr>
-//     </thead>
-//     <tbody>
-//         {posts.map(post => {
-//             return (
-//                 edit === post.id ?
-//                     <tr key={post.id}>
-//                         <td><input type="text" value={updateText} onChange={(e) => setUpdateText(e.target.value)}></input></td>
-//                         <td><button onClick={(e) => updatePost(e, post.id)}>Save</button></td>
-//                         <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
-//                     </tr> :
-//                     <tr key={post.id}>
-//                         <td>{post.text}</td>
-//                         <td><button onClick={() => editPost(post.id, post.text)}>Edit</button></td>
-//                         <td><button onClick={() => deletePost(post.id)}>Delete</button></td>
-//                     </tr>)
-//         })}
-//     </tbody>
-// </table>

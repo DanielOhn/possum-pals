@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { uploadFile } from 'react-s3';
 import config from '../S3Config';
 
@@ -34,21 +34,24 @@ const InputPost = () => {
                 body: JSON.stringify(body)
             })
 
-            // window.location = '/';
+            window.location = '/';
         } catch (err) {
             console.error(err.message);
         }
     }
 
     return (
-        <Fragment>
-            <h1>Input Post</h1>
-            <form onSubmit={onSubmitForm}>
-                <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
+        <>
+            <div className="header">
+                <h1>Possum Pals</h1>
+                <h4>You Can (Not) Shitpost</h4>
+            </div>
+            <form onSubmit={onSubmitForm} className="post-input">
+                <textarea placeholder="Add some text..." type="text" value={text} onChange={(e) => setText(e.target.value)} />
                 <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleFile(e)} />
-                <button disabled={disabled}>Add</button>
+                <button disabled={disabled}>Create Thread</button>
             </form>
-        </Fragment>
+        </>
     )
 };
 
