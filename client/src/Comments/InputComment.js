@@ -1,0 +1,67 @@
+import { uploadFile } from "react-s3";
+import { useState } from "react"
+import config from "../S3Config";
+import { useParams } from 'react-router-dom';
+
+window.Buffer = window.Buffer || require("buffer").Buffer;
+
+const InputComment = () => {
+    const [text, setText] = useState("");
+    const [file, setFile] = useState(null);
+    const [disabled, setDisabled] = useState(true);
+    const params = useParams();
+
+    const handleFile = async (e) => {
+        if (e.target.files[0]) {
+            setFile(e.target.files[0]);
+            setDisabled(false);
+        }
+    }
+
+    const updateText = async (e) => {
+        setText(e.target.value);
+        setDisabled(false);
+
+        if (text === "" || file === null) {
+            setDisabled(true);
+        }
+    }
+
+    const onSubmitForm = async (e) => {
+        e.preventDefault();
+
+        try {
+            console.log(file);
+            const res = uploadFile(file, config).then(data => console.log(data)).catch(err => console.error(err));
+            const body = { text: text, file: file.name, parent: params.id }
+
+            console.log(JSON.stringify(body));
+
+            const r = await fetch('/comments', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            })
+
+            window.location = `/p/${params.id}`;
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    return (
+        <>
+            <div className="header">
+                <h1>Possum Pals</h1>
+                <h4>You Can (Not) Shitpost</h4>
+            </div>
+            <form onSubmit={onSubmitForm} className="post-input">
+                <textarea placeholder="Add some text..." type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleFile(e)} />
+                <button disabled={disabled}>Add Comment</button>
+            </form>
+        </>
+    )
+}
+
+export default InputComment;

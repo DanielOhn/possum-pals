@@ -1,6 +1,17 @@
--- CREATE DATABASE pern_stack;
+-- CREATE DATABASE imageboard;
 
-CREATE TABLE posts(
-    post_id SERIAL PRIMARY KEY,
-    text VARCHAR(255)
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY NOT NULL,
+    text VARCHAR(255),
+    file VARCHAR(255),
+    created TIMESTAMP
+);
+
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY NOT NULL,
+  text VARCHAR(255),
+  created TIMESTAMP,
+  file VARCHAR(255),
+  parent int REFERENCES posts(id)
 );

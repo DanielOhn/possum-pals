@@ -87,3 +87,30 @@ h4 {
   padding-top: 0;
   margin-top: 4px;
 }
+
+.comments {
+  padding-top: 32px;
+  margin-right: 8px;
+}
+
+.comment {
+  background-color: #4E6A5B;
+  border: 1px solid #946877;
+  color: #4E8D84;
+  
+  display: flex;
+  flex-flow: column row;
+
+  min-width: 600px;
+  min-height: 200px;
+}
+
+.comment p {
+  padding-left: 8px;
+  margin: 8px;
+}
+.comment-deets {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
