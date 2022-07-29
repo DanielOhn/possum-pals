@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Banner from '../Banner';
 
 import InputComment from '../Comments/InputComment';
 import ListComments from '../Comments/ListComments';
@@ -24,6 +25,7 @@ const SinglePost = () => {
 
     return (
         <>
+            <Banner />
             <InputComment />
             <div className="posts">
                 {post ?

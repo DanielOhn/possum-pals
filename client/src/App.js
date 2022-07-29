@@ -5,6 +5,7 @@ import ListPosts from './Posts/ListPosts';
 import SinglePost from './Posts/SinglePost';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Banner from './Banner';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 const Landing = () => {
   return (
     <div className="container">
+      <Banner />
       <InputPost />
       <ListPosts />
     </div>

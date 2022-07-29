@@ -11,6 +11,20 @@ body {
 
 }
 
+.banner {
+  display: flex;
+  flex-flow: revert;
+  justify-content: center;
+  padding-top: 32px;
+}
+
+.banner img {
+  height: 100px;
+  width: 300px;
+
+  margin: auto;
+}
+
 button {
   color: #946877;
   background-color: #4E6A5B;
@@ -18,18 +32,25 @@ button {
   border: none;
 
   width: 24%;
-
   align-self: center;
 }
 
-img {
+.posts img {
+  max-height: 180px;
+  max-width: 180px;
+  padding: 8px;
+}
+
+.comment img {
   max-height: 180px;
   max-width: 180px;
   padding: 8px;
 }
 
 .posts {
-  padding-top: 32px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: 16px;
 }
 
 .post {
@@ -38,16 +59,19 @@ img {
   color: #4E8D84;
   
   display: flex;
-  flex-flow: column row;
+  flex-flow: row nowrap;
 
   min-width: 600px;
   min-height: 200px;
+
+  margin-top: 12px;
 }
 
 .post p {
   padding-left: 8px;
   margin: 8px;
 }
+
 .post-deets {
   display: flex;
   flex-flow: column wrap;
@@ -68,6 +92,19 @@ img {
   width: 400px;
 
   margin: auto;
+}
+
+.small-deets {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+
+  max-height: 24px;
+}
+
+.small-deets a {
+  margin: 4px;
+
 }
 
 textarea {

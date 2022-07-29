@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SinglePost from "./SinglePost";
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const ListPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -70,7 +70,10 @@ const ListPosts = () => {
                         <img alt={post.name} src={process.env.REACT_APP_S3_URL + post.file} />
                         <div className="post-deets">
                             <p>{post.text}</p>
-                            <small>{post.created}</small>
+                            <div className="small-deets">
+                                <small>{post.created}</small>
+                                <Link to={`/p/${post.id}`}><small>[View Thread]</small></Link>
+                            </div>
                         </div>
                     </div>
                 )})}
