@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
+import SinglePost from "./SinglePost";
+
+import { useParams } from 'react-router-dom';
 
 const ListPosts = () => {
     const [posts, setPosts] = useState([]);
     const [edit, setEdit] = useState(null);
     const [updateText, setUpdateText] = useState("");
+
+    const params = useParams();
 
     const getPosts = async () => {
         try {
@@ -62,7 +67,7 @@ const ListPosts = () => {
                 {posts.map(post => {
                     return(
                     <div className="post" key={post.id}>
-                        <img src={process.env.REACT_APP_S3_URL + post.file} />
+                        <img alt={post.name} src={process.env.REACT_APP_S3_URL + post.file} />
                         <div className="post-deets">
                             <p>{post.text}</p>
                             <small>{post.created}</small>
@@ -73,5 +78,6 @@ const ListPosts = () => {
         </>
     )
 };
+
 
 export default ListPosts;
