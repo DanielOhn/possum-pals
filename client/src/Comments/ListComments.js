@@ -12,7 +12,7 @@ const ListComments = () => {
             const parent = params.id;
             const res = await fetch(`/comments/${parent}`);
             const data = await res.json();
-            
+
             setComments(data);
         } catch (err) {
             console.error(err.message);
@@ -28,8 +28,7 @@ const ListComments = () => {
             {comments.map(comment => {
                 return (
                     <div className="comment" key={comment.id}>
-                        
-                        {comment.img ? <img alt={comment.name} src={process.env.REACT_APP_S3_URL + comment.file} /> : <div></div>}
+                        {comment.file !== null ? <img alt={comment.name} src={process.env.REACT_APP_S3_URL + comment.file} /> : <div></div>}
                         <div className="comment-deets">
                             <p>{comment.text}</p>
                             <small>{comment.created}</small>

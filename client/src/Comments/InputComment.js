@@ -1,5 +1,5 @@
 import { uploadFile } from "react-s3";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import config from "../S3Config";
 import { useParams } from 'react-router-dom';
 
@@ -7,23 +7,13 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const InputComment = () => {
     const [text, setText] = useState("");
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState("");
     const [disabled, setDisabled] = useState(true);
     const params = useParams();
 
     const handleFile = async (e) => {
         if (e.target.files[0]) {
             setFile(e.target.files[0]);
-            setDisabled(false);
-        }
-    }
-
-    const updateText = async (e) => {
-        setText(e.target.value);
-        setDisabled(false);
-
-        if (text === "" || file === null) {
-            setDisabled(true);
         }
     }
 
@@ -48,6 +38,14 @@ const InputComment = () => {
             console.error(err.message);
         }
     }
+
+    useEffect(() => {
+        if (text !== "" || file !== "") {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+    }, [text, file])
 
     return (
         <>
