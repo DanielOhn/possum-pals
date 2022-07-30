@@ -2,26 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ListComments = () => {
-
     const [comments, setComments] = useState([]);
     const params = useParams();
 
-    const getComments = async () => {
-
-        try {
-            const parent = params.id;
-            const res = await fetch(`/comments/${parent}`);
-            const data = await res.json();
-
-            setComments(data);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-
     useEffect(() => {
+        const getComments = async () => {
+            try {
+                const parent = params.id;
+                const res = await fetch(`/comments/${parent}`);
+                const data = await res.json();
+    
+                setComments(data);
+            } catch (err) {
+                console.error(err.message);
+            }
+        }
+
         getComments();
-    }, []);
+    }, [])
 
     return (
         <>

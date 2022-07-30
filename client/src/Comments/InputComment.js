@@ -9,6 +9,7 @@ const InputComment = () => {
     const [text, setText] = useState("");
     const [file, setFile] = useState("");
     const [disabled, setDisabled] = useState(true);
+    
     const params = useParams();
 
     const handleFile = async (e) => {
@@ -21,11 +22,8 @@ const InputComment = () => {
         e.preventDefault();
 
         try {
-            console.log(file);
-            const res = uploadFile(file, config).then(data => console.log(data)).catch(err => console.error(err));
+            uploadFile(file, config).then(data => console.log(data)).catch(err => console.error(err));
             const body = { text: text, file: file.name, parent: params.id }
-
-            console.log(JSON.stringify(body));
 
             const r = await fetch('/comments', {
                 method: "POST",

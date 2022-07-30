@@ -40,7 +40,6 @@ const SinglePost = () => {
                 }
             </div>
             <ListComments />
-
         </>
     )
 }

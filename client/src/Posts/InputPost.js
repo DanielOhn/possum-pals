@@ -21,12 +21,8 @@ const InputPost = () => {
         e.preventDefault();
 
         try {
-            console.log(file);
             const res = uploadFile(file, config).then(data => console.log(data)).catch(err => console.error(err));
             const body = { text: text, file: file.name }
-
-            console.log(JSON.stringify(body));
-
 
             const r = await fetch('/posts', {
                 method: "POST",

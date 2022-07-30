@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import SinglePost from "./SinglePost";
-
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ListPosts = () => {
     const [posts, setPosts] = useState([]);
-    const [edit, setEdit] = useState(null);
-    const [updateText, setUpdateText] = useState("");
-
-    const params = useParams();
+    // const [edit, setEdit] = useState(null);
+    // const [updateText, setUpdateText] = useState("");
 
     const getPosts = async () => {
         try {
@@ -21,41 +17,41 @@ const ListPosts = () => {
         }
     }
 
-    const editPost = async (id, text) => {
-        setUpdateText(text);
-        setEdit(id);
-    }
+    // const editPost = async (id, text) => {
+    //     setUpdateText(text);
+    //     setEdit(id);
+    // }
 
-    const updatePost = async (e, id) => {
-        e.preventDefault();
+    // const updatePost = async (e, id) => {
+    //     e.preventDefault();
 
-        try {
-            const body = { updateText }
+    //     try {
+    //         const body = { updateText }
 
-            const res = await fetch(`/posts/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": 'application/json' },
-                body: JSON.stringify(body)
-            })
+    //         const res = await fetch(`/posts/${id}`, {
+    //             method: "PUT",
+    //             headers: { "Content-Type": 'application/json' },
+    //             body: JSON.stringify(body)
+    //         })
 
-            window.location = '/';
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
+    //         window.location = '/';
+    //     } catch (err) {
+    //         console.error(err.message);
+    //     }
+    // }
 
-    const deletePost = async (id) => {
-        try {
-            const deletePost = await fetch(`/posts/${id}`, {
-                method: "DELETE"
-            });
+    // const deletePost = async (id) => {
+    //     try {
+    //         const deletePost = await fetch(`/posts/${id}`, {
+    //             method: "DELETE"
+    //         });
 
-            setPosts(posts.filter(post => post.id !== id));
+    //         setPosts(posts.filter(post => post.id !== id));
 
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
+    //     } catch (err) {
+    //         console.error(err.message);
+    //     }
+    // }
 
     useEffect(() => {
         getPosts();
