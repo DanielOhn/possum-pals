@@ -6,17 +6,6 @@ const ListPosts = () => {
     // const [edit, setEdit] = useState(null);
     // const [updateText, setUpdateText] = useState("");
 
-    const getPosts = async () => {
-        try {
-            const res = await fetch("/posts");
-            const data = await res.json();
-            setPosts(data);
-            console.log(data);
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-
     // const editPost = async (id, text) => {
     //     setUpdateText(text);
     //     setEdit(id);
@@ -54,6 +43,15 @@ const ListPosts = () => {
     // }
 
     useEffect(() => {
+        const getPosts = async () => {
+            try {
+                const res = await fetch("/posts");
+                const data = await res.json();
+                setPosts(data);
+            } catch (err) {
+                console.error(err.message);
+            }
+        }
         getPosts();
     }, [])
 
