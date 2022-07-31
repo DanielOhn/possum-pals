@@ -122,7 +122,10 @@ app.get('/sign-s3', (req, res) => {
     const fileName = req.query.fileName;
     const fileType = req.query.fileType;
 
-    const s3 = new aws.S3();
+    const s3 = new aws.S3({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    });
 
     const s3Params = {
         Bucket: process.env.S3_BUCKET,
