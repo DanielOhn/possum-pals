@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { uploadFile } from 'react-s3';
-import config from '../S3Config';
+import { useState, useEffect } from 'react';
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const InputPost = () => {
-
     const [text, setText] = useState("");
     const [file, setFile] = useState();
     const [disabled, setDisabled] = useState(true);
+    const [signed, setSigned] = useState(null);
+    const [url, setUrl] = useState(null);
 
     const handleFile = async (e) => {
         if (e.target.files[0]) {
@@ -20,21 +19,38 @@ const InputPost = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
 
-        try {
-            const res = uploadFile(file, config).then(data => console.log(data)).catch(err => console.error(err));
-            const body = { text: text, file: file.name }
-
-            const r = await fetch('/posts', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            })
-
-            window.location = '/';
-        } catch (err) {
-            console.error(err.message);
+        if (url !== null && signed !== null) {
+            try {
+                const body = { text: text, file: file.name }
+    
+                await fetch(signed, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+    
+                await fetch('/posts', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body)
+                })
+    
+                window.location = '/';
+            } catch (err) {
+                console.error(err.message);
+            }
         }
     }
+
+    useEffect(() => {
+        const getSignedRequest = async () => {
+            if (file !== undefined) {
+                const res = await fetch(`/sign-s3?fileName=${file.name}&fileType=${file.type}`);
+                const data = await res.json();
+    
+                setSigned(data.signedRequest);
+                setUrl(data.url);
+            }
+        }
+
+        getSignedRequest();
+    }, [file])
 
     return (
         <>

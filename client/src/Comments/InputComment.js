@@ -1,6 +1,6 @@
 import { uploadFile } from "react-s3";
 import { useEffect, useState } from "react"
-import config from "../S3Config";
+import config from "../S3-Stuff/S3Config";
 import { useParams } from 'react-router-dom';
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -9,7 +9,7 @@ const InputComment = () => {
     const [text, setText] = useState("");
     const [file, setFile] = useState("");
     const [disabled, setDisabled] = useState(true);
-    
+
     const params = useParams();
 
     const handleFile = async (e) => {

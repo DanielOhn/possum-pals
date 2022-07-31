@@ -3,6 +3,12 @@ const app = express();
 const cors = require('cors');
 const pool = require("./db");
 
+const aws = require('aws-sdk');
+
+const credentials = new aws.SharedIniFileCredentials({profile: 'default'});
+aws.config.credentials = credentials;
+aws.config.region = process.env.S3_REGION;
+
 const PORT = process.env.PORT || 5002;
 const path = require('path');
 
@@ -106,6 +112,40 @@ app.get('/comments/:id', async (req, res) => {
         const allComments = await pool.query("SELECT * FROM comments WHERE parent = $1", [id]);
 
         res.json(allComments.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+})
+
+// AWS S3 Bucket
+app.get('/sign-s3', (req, res) => {
+    const fileName = req.query.fileName;
+    const fileType = req.query.fileType;
+
+    const s3 = new aws.S3();
+
+    const s3Params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: fileName,
+        Expires: 6000,
+        ContentType: fileType,
+        ACL: 'public-read'
+    };
+
+    try {
+        s3.getSignedUrl('putObject', s3Params, (err, data) => {
+            if (err) {
+                console.error(err);
+                return res.end();
+            }
+
+            const returnData = {
+                signedRequest: data,
+                url: `https://${process.env.S3_BUCKET}.s3.amazonaws.com/${fileName}`
+            };
+
+            res.json(returnData);
+        })
     } catch (err) {
         console.log(err.message);
     }
