@@ -21,7 +21,7 @@ const InputPost = () => {
 
         if (url !== null && signed !== null) {
             try {
-                const body = { text: text, file: file.name }
+                const body = { text: text, file: url }
     
                 await fetch(signed, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
     

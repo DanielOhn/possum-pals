@@ -61,7 +61,7 @@ const ListPosts = () => {
                 {posts.map(post => {
                     return(
                     <div className="post" key={post.id}>
-                        <img alt={post.name} src={process.env.REACT_APP_S3_URL + post.file} />
+                        <img alt={post.name} src={post.file} />
                         <div className="post-deets">
                             <p>{post.text}</p>
                             <div className="small-deets">

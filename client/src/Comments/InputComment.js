@@ -1,6 +1,4 @@
-import { uploadFile } from "react-s3";
 import { useEffect, useState } from "react"
-import config from "../S3-Stuff/S3Config";
 import { useParams } from 'react-router-dom';
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -10,11 +8,25 @@ const InputComment = () => {
     const [file, setFile] = useState("");
     const [disabled, setDisabled] = useState(true);
 
+    const [signed, setSigned] = useState(null);
+    const [url, setUrl] = useState("");
+
     const params = useParams();
 
     const handleFile = async (e) => {
         if (e.target.files[0]) {
             setFile(e.target.files[0]);
+            getSignedRequest();
+        }
+    }
+
+    const getSignedRequest = async () => {
+        if (file !== "") {
+            const res = await fetch(`/sign-s3?fileName=${file.name}&fileType=${file.type}`);
+            const data = await res.json();
+
+            setSigned(data.signedRequest);
+            setUrl(data.url);
         }
     }
 
@@ -22,8 +34,11 @@ const InputComment = () => {
         e.preventDefault();
 
         try {
-            uploadFile(file, config).then(data => console.log(data)).catch(err => console.error(err));
-            const body = { text: text, file: file.name, parent: params.id }
+            if (file !== "") {
+                await fetch(signed, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+            }
+
+            const body = { text: text, file: url, parent: params.id }
 
             const r = await fetch('/comments', {
                 method: "POST",
