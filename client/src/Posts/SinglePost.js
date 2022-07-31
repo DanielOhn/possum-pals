@@ -30,7 +30,7 @@ const SinglePost = () => {
             <div className="posts">
                 {post ?
                     <div className="post" key={post.id}>
-                        <img src={process.env.REACT_APP_S3_URL + post.file} />
+                        <img src={post.file} />
                         <div className="post-deets">
                             <p>{post.text}</p>
                             <small>{post.created}</small>

@@ -13,20 +13,9 @@ const InputComment = () => {
 
     const params = useParams();
 
-    const handleFile = async (e) => {
+    const handleFile = (e) => {
         if (e.target.files[0]) {
             setFile(e.target.files[0]);
-            getSignedRequest();
-        }
-    }
-
-    const getSignedRequest = async () => {
-        if (file !== "") {
-            const res = await fetch(`/sign-s3?fileName=${file.name}&fileType=${file.type}`);
-            const data = await res.json();
-
-            setSigned(data.signedRequest);
-            setUrl(data.url);
         }
     }
 
@@ -40,7 +29,7 @@ const InputComment = () => {
 
             const body = { text: text, file: url, parent: params.id }
 
-            const r = await fetch('/comments', {
+            await fetch('/comments', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -53,11 +42,27 @@ const InputComment = () => {
     }
 
     useEffect(() => {
-        if (text !== "" || file !== "") {
+        if (text !== "") {
             setDisabled(false);
         } else {
             setDisabled(true);
         }
+
+        if (file !== "") {
+            const getSignedRequest = async () => {
+                if (file !== "") {
+                    const res = await fetch(`/sign-s3?fileName=${file.name}&fileType=${file.type}`);
+                    const data = await res.json();
+
+                    setSigned(data.signedRequest);
+                    setUrl(data.url);
+                }
+            }
+
+            setDisabled(false);
+            getSignedRequest();
+        }
+
     }, [text, file])
 
     return (
