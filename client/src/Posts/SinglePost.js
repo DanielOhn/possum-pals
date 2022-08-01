@@ -32,7 +32,10 @@ const SinglePost = () => {
                     <div className="post" key={post.id}>
                         <img src={post.file} />
                         <div className="post-deets">
-                            <p>{post.text}</p>
+                            <div className="text-deets">
+                                <p>{post.text}</p>
+                                <p className="text-id">#OP</p>
+                            </div>
                             <small>{post.created}</small>
                         </div>
                     </div> :

@@ -84,6 +84,7 @@ button:disabled {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
+  width: 100%;
 }
 
 .post-deets small {
@@ -100,6 +101,16 @@ button:disabled {
   width: 400px;
 
   margin: auto;
+}
+
+.text-deets {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.text-deets .text-id {
+  font-size: 12px;
 }
 
 .small-deets {
@@ -160,6 +171,7 @@ h4 {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
+  width: 100%;
 }
 
 .comment-deets small {

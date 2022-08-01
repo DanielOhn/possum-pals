@@ -59,18 +59,22 @@ const ListPosts = () => {
         <>
             <div className="posts">
                 {posts.map(post => {
-                    return(
-                    <div className="post" key={post.id}>
-                        <img alt={post.name} src={post.file} />
-                        <div className="post-deets">
-                            <p>{post.text}</p>
-                            <div className="small-deets">
-                                <small>{post.created}</small>
-                                <Link to={`/p/${post.id}`}><small>[View Thread]</small></Link>
+                    return (
+                        <div className="post" key={post.id} id={post.id}>
+                            <img alt={post.name} src={post.file} />
+                            <div className="post-deets">
+                                <div className="text-deets">
+                                    <p>{post.text}</p>
+                                    <p className="text-id">#{post.id}</p>
+                                </div>
+                                <div className="small-deets">
+                                    <small>{post.created}</small>
+                                    <Link to={`/p/${post.id}`}><small>[View Thread]</small></Link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )})}
+                    )
+                })}
             </div>
         </>
     )

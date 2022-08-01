@@ -25,10 +25,13 @@ const ListComments = () => {
         <>
             {comments.map(comment => {
                 return (
-                    <div className="comment" key={comment.id}>
+                    <div className="comment" key={comment.id} id={comment.id}>
                         {comment.file !== "" ? <img alt={comment.name} src={comment.file} /> : <div></div>}
                         <div className="comment-deets">
-                            <p>{comment.text}</p>
+                            <div className="text-deets">
+                                <p>{comment.text}</p>
+                                <p className="text-id">#{comment.id}</p>
+                            </div>
                             <small>{comment.created}</small>
                         </div>
                     </div>
