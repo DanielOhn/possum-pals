@@ -26,6 +26,7 @@ const Landing = () => {
       <Banner />
       <InputPost />
       <ListPosts />
+      <div className='footer'></div>
     </div>
   )
 }

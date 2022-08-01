@@ -5,7 +5,8 @@ CREATE TABLE posts (
     id SERIAL PRIMARY KEY NOT NULL,
     text VARCHAR(255),
     file VARCHAR(255),
-    created TIMESTAMP
+    created TIMESTAMP,
+    updated TIMESTAMP
 );
 
 CREATE TABLE comments (

@@ -31,7 +31,7 @@ app.post('/posts', async (req, res) => {
         const time = await pool.query('SELECT LOCALTIMESTAMP');
         const { localtimestamp } = time.rows[0];
 
-        const newPost = await pool.query('INSERT INTO posts(text, created, file) VALUES ($1, $2, $3) RETURNING *', [text, localtimestamp, file]);
+        const newPost = await pool.query('INSERT INTO posts(text, created, file, updated) VALUES ($1, $2, $3, $4) RETURNING *', [text, localtimestamp, file, localtimestamp]);
 
         res.json(newPost.rows[0]);
     } catch (err) {
@@ -78,18 +78,21 @@ app.get('/posts/:id', async (req, res) => {
     }
 })
 
-// Get all
+// Get all posts
 app.get('/posts', async (req, res) => {
     try {
-        const allPosts = await pool.query("SELECT * FROM posts");
+        const allPosts = await pool.query("SELECT * FROM posts ORDER BY updated DESC");
+        const comments = await pool.query("SELECT DISTINCT ON (parent) id, text, created, parent, file FROM comments");
 
-        res.json(allPosts.rows);
+        const result = {posts: allPosts.rows, comments: comments.rows}
+        res.json(result);
     } catch (err) {
         console.log(err.message);
     }
 })
 
 // Comments Routes
+// Create Comment
 app.post('/comments', async (req, res) => {
     try {
         const { text, file, parent } = req.body;
@@ -98,6 +101,8 @@ app.post('/comments', async (req, res) => {
         const { localtimestamp } = time.rows[0];
 
         const newComment = await pool.query('INSERT INTO comments(text, created, file, parent) VALUES ($1, $2, $3, $4) RETURNING *', [text, localtimestamp, file, parent]);
+        const updatePost = await pool.query('UPDATE posts SET updated = $1 WHERE id = $2', [localtimestamp, parent]);
+
         res.json(newComment.rows[0]);
     } catch (err) {
         console.log(err);
