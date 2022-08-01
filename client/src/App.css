@@ -29,10 +29,18 @@ button {
   color: #946877;
   background-color: #4E6A5B;
   border-radius: 4%;
-  border: none;
+  border: 1px solid #946877;
 
   width: 24%;
   align-self: center;
+}
+
+button:hover {
+  background-color: #4e6a5b59;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 .posts img {

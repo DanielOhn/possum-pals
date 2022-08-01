@@ -18,6 +18,7 @@ const InputPost = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
+        setDisabled(true);
 
         if (url !== null && signed !== null) {
             try {

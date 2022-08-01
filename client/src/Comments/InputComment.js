@@ -21,6 +21,7 @@ const InputComment = () => {
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
+        setDisabled(true);
 
         try {
             if (file !== "") {
