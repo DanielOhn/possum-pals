@@ -43,6 +43,7 @@ const SinglePost = () => {
                 }
             </div>
             <ListComments />
+            <div className='footer'></div>
         </>
     )
 }

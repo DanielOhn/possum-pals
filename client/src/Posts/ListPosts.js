@@ -46,18 +46,20 @@ const ListPosts = () => {
     const GetComment = ({ pid }) => {
         const comment = comments.filter(comment => comment.parent === pid)[0];
 
-        return (
-            <div className="comment">
-                {comment.file !== "" ? <img alt={comment.name} src={comment.file} /> : <div></div>}
-                <div className="comment-deets">
-                    <div className="text-deets">
-                        <p>{comment.text}</p>
-                        <p className="text-id">#{comment.id}</p>
+        if (comment) {
+            return (
+                <div className="comment">
+                    {comment.file !== "" ? <img alt={comment.name} src={comment.file} /> : <div></div>}
+                    <div className="comment-deets">
+                        <div className="text-deets">
+                            <p>{comment.text}</p>
+                            <p className="text-id">#{comment.id}</p>
+                        </div>
+                        <small>{comment.created}</small>
                     </div>
-                    <small>{comment.created}</small>
-                </div>
-            </div >
-        );
+                </div >
+            );
+        }
     }
 
     useEffect(() => {

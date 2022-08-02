@@ -16,3 +16,5 @@ CREATE TABLE comments (
   file VARCHAR(255),
   parent int REFERENCES posts(id)
 );
+
+ALTER TABLE posts ADD COLUMN "updated" TIMESTAMP DEFAULT LOCALTIMESTAMP;
