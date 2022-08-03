@@ -4,6 +4,7 @@ import Banner from '../Banner';
 
 import InputComment from '../Comments/InputComment';
 import ListComments from '../Comments/ListComments';
+import Image from "../Images/Image";
 
 const SinglePost = () => {
     const [post, setPost] = useState("");
@@ -30,7 +31,7 @@ const SinglePost = () => {
             <div className="posts">
                 {post ?
                     <div className="post" key={post.id}>
-                        <img src={post.file} />
+                        <Image alt={post.name} file={post.file} />
                         <div className="post-deets">
                             <div className="text-deets">
                                 <p>{post.text}</p>

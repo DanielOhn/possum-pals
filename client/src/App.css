@@ -43,16 +43,15 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.posts img {
+.small img {
   max-height: 180px;
   max-width: 180px;
   padding: 8px;
 }
 
-.comment img {
-  max-height: 180px;
-  max-width: 180px;
-  padding: 8px;
+.expand img {
+  max-width: 100%;
+  height: auto;
 }
 
 .posts {

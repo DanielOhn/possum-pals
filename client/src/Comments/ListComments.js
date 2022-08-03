@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Image from "../Images/Image";
+
 const ListComments = () => {
     const [comments, setComments] = useState([]);
     const params = useParams();
@@ -26,7 +28,7 @@ const ListComments = () => {
             {comments.map(comment => {
                 return (
                     <div className="comment" key={comment.id} id={comment.id}>
-                        {comment.file !== "" ? <img alt={comment.name} src={comment.file} /> : <div></div>}
+                        {comment.file !== "" ? <Image alt={comment.name} file={comment.file} /> : <div></div>}
                         <div className="comment-deets">
                             <div className="text-deets">
                                 <p>{comment.text}</p>
