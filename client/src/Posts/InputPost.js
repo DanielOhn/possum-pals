@@ -60,7 +60,7 @@ const InputPost = () => {
                 <h4>You Can (Not) Shitpost</h4>
             </div>
             <form onSubmit={onSubmitForm} className="post-input">
-                <textarea placeholder="Add some text..." type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                <textarea placeholder="Need an image to make a thread..." type="text" value={text} onChange={(e) => setText(e.target.value)} />
                 <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleFile(e)} />
                 <button disabled={disabled}>Create Thread</button>
             </form>

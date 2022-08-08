@@ -3,7 +3,7 @@
   --secondary: #89B0AE;
   --main-bg: #555B6E;
   --outline: #EA638c;
-  --shadow: #F88DAD;
+  --darken: rgba(137, 176, 174, 0.714);
 }
 
 body {
@@ -45,7 +45,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--main-bg);
+  background-color: var(--darken);
 }
 
 button:disabled {
@@ -169,6 +169,7 @@ h4 {
   min-height: 120px;
 
   margin-left: 20px;
+  margin-top: 1px;
 }
 
 .comment p {
