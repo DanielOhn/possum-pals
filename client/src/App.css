@@ -243,8 +243,8 @@ button:disabled {
 }
 
 .small img {
-  max-height: 180px;
-  max-width: 180px;
+  max-height: 140px;
+  max-width: 140px;
   padding: 8px;
 }
 
@@ -267,8 +267,8 @@ button:disabled {
   display: flex;
   flex-flow: row wrap;
 
-  max-width: 420px;
-  min-height: 200px;
+  max-width: 300px;
+  min-height: 120px;
 
   margin-top: 12px;
 }
@@ -296,9 +296,13 @@ button:disabled {
   display: flex;
   flex-flow: column nowrap;
   align-self: center;
-  width: 400px;
+  width: 280px;
 
   margin: auto;
+}
+
+.post-input button {
+  width: 96px;
 }
 
 .text-deets {
@@ -355,8 +359,8 @@ h4 {
   display: flex;
   flex-flow: column nowrap;
 
-  max-width: 420px;
-  min-height: 120px;
+  max-width: 280px;
+  min-height: 80px;
 
   margin-left: 20px;
   margin-top: 1px;
