@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import Image from "../Images/Image";
 
 const ListPosts = () => {
+    const [loading, setLoading] = useState(true);
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
- 
+
     const GetComment = ({ pid }) => {
         const comment = comments.filter(comment => comment.parent === pid)[0];
 
@@ -35,6 +36,8 @@ const ListPosts = () => {
 
                 setPosts(data.posts);
                 setComments(data.comments);
+
+                setLoading(false);
             } catch (err) {
                 console.error(err.message);
             }
@@ -45,26 +48,27 @@ const ListPosts = () => {
     return (
         <>
             <div className="posts">
-                {posts.map((post) => {
-                    return (
-                        <div key={post.id}>
-                            <div className="post" id={post.id}>
-                                <Image alt={post.name} file={post.file} />
-                                <div className="post-deets">
-                                    <div className="text-deets">
-                                        <p>{post.text}</p>
-                                        <p className="text-id">#{post.id}</p>
-                                    </div>
-                                    <div className="small-deets">
-                                        <small>{post.created}</small>
-                                        <Link to={`/p/${post.id}`}><small>[View Thread]</small></Link>
+                {loading ? <p>Loading threads...</p> :
+                    posts.map((post) => {
+                        return (
+                            <div key={post.id}>
+                                <div className="post" id={post.id}>
+                                    <Image alt={post.name} file={post.file} />
+                                    <div className="post-deets">
+                                        <div className="text-deets">
+                                            <p>{post.text}</p>
+                                            <p className="text-id">#{post.id}</p>
+                                        </div>
+                                        <div className="small-deets">
+                                            <small>{post.created}</small>
+                                            <Link to={`/p/${post.id}`}><small>[View Thread]</small></Link>
+                                        </div>
                                     </div>
                                 </div>
+                                <GetComment pid={post.id} />
                             </div>
-                            <GetComment pid={post.id} />
-                        </div>
-                    )
-                })}
+                        )
+                    })}
             </div>
         </>
     )

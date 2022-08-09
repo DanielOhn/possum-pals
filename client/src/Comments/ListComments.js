@@ -5,6 +5,7 @@ import Image from "../Images/Image";
 
 const ListComments = () => {
     const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
     const params = useParams();
 
     useEffect(() => {
@@ -13,7 +14,8 @@ const ListComments = () => {
                 const parent = params.id;
                 const res = await fetch(`/comments/${parent}`);
                 const data = await res.json();
-    
+
+                setLoading(false);
                 setComments(data);
             } catch (err) {
                 console.error(err.message);
@@ -25,7 +27,9 @@ const ListComments = () => {
 
     return (
         <>
-            {comments.map(comment => {
+            {loading ? 
+                <p>Loading comments...</p>
+            : comments.map(comment => {
                 return (
                     <div className="comment" key={comment.id} id={comment.id}>
                         {comment.file !== "" ? <Image alt={comment.name} file={comment.file} /> : <div></div>}
