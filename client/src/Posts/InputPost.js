@@ -42,15 +42,12 @@ const InputPost = () => {
 
     useEffect(() => {
         const getSignedRequest = async () => {
-
             if (file !== undefined) {
                 const newName = nanoid();
-                console.log(newName);
 
                 const res = await fetch(`/sign-s3?fileName=${newName}&fileType=${file.type}`);
                 const data = await res.json();
 
-    
                 setSigned(data.signedRequest);
                 setUrl(data.url);
             }

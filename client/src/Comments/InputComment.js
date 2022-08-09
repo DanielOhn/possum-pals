@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
+import { nanoid } from 'nanoid';
+
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -50,14 +52,14 @@ const InputComment = () => {
         }
 
         if (file !== "") {
-            const getSignedRequest = async () => {
-                if (file !== "") {
-                    const res = await fetch(`/sign-s3?fileName=${file.name}&fileType=${file.type}`);
-                    const data = await res.json();
+            const newName = nanoid();
 
-                    setSigned(data.signedRequest);
-                    setUrl(data.url);
-                }
+            const getSignedRequest = async () => {
+                const res = await fetch(`/sign-s3?fileName=${newName}&fileType=${file.type}`);
+                const data = await res.json();
+
+                setSigned(data.signedRequest);
+                setUrl(data.url);
             }
 
             setDisabled(false);
