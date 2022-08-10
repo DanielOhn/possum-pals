@@ -192,7 +192,6 @@ h4 {
   height: 40px;
 }
 
-/* 
 @media screen and (min-width: 600px) {
   body {
     background-color: var(--main-bg);
@@ -273,8 +272,8 @@ h4 {
   }
   
   .post p {
-    padding-left: 8px;
     margin: 8px;
+    font-size: 16px;
   }
   
   .post-deets {
@@ -302,7 +301,7 @@ h4 {
   
   .text-deets {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
   }
   
@@ -313,14 +312,11 @@ h4 {
   .small-deets {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
-  
-    max-height: 24px;
+    justify-content: space-between;
   }
   
   .small-deets a {
     margin: 4px;
-  
   }
   
   textarea {
@@ -352,9 +348,9 @@ h4 {
     color: var(--primary);
     
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
   
-    min-width: 600px;
+    min-width: 580px;
     min-height: 120px;
   
     margin-left: 20px;
@@ -362,8 +358,8 @@ h4 {
   }
   
   .comment p {
-    padding-left: 8px;
     margin: 8px;
+    font-size: 16px;
   }
   .comment-deets {
     display: flex;
@@ -374,12 +370,10 @@ h4 {
   
   .comment-deets small {
     font-size: 12px;
-    padding-bottom: 8px;
-    padding-left: 8px;
     margin: 8px;
   }
   
   .footer {
     height: 40px;
   }  
-} */
+}
