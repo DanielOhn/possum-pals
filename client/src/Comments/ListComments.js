@@ -27,22 +27,22 @@ const ListComments = () => {
 
     return (
         <>
-            {loading ? 
+            {loading ?
                 <p>Loading comments...</p>
-            : comments.map(comment => {
-                return (
-                    <div className="comment" key={comment.id} id={comment.id}>
-                        {comment.file !== "" ? <Image alt={comment.name} file={comment.file} /> : <div></div>}
-                        <div className="comment-deets">
-                            <div className="text-deets">
-                                <p>{comment.text}</p>
-                                <p className="text-id">#{comment.id}</p>
+                : comments.map(comment => {
+                    return (
+                        <div className="comment" key={comment.id} id={comment.id}>
+                            {comment.file !== "" ? <Image alt={comment.name} file={comment.file} /> : <div></div>}
+                            <div className="comment-deets">
+                                <div className="text-deets">
+                                    <p className="text-content">{comment.text}</p>
+                                    <p className="text-id">#{comment.id}</p>
+                                </div>
+                                <small>{comment.created}</small>
                             </div>
-                            <small>{comment.created}</small>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
         </>
     )
 

@@ -34,7 +34,7 @@ const SinglePost = () => {
                         <Image alt={post.name} file={post.file} />
                         <div className="post-deets">
                             <div className="text-deets">
-                                <p>{post.text}</p>
+                                <p className="text-content">{post.text}</p>
                                 <p className="text-id">#OP</p>
                             </div>
                             <small>{post.created}</small>
