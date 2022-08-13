@@ -3,14 +3,29 @@ import { Link } from 'react-router-dom';
 
 import Image from "../Images/Image";
 
-const ListPosts = () => {
+const ListPosts = ({pid}) => {
     const [loading, setLoading] = useState(true);
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
 
-    const GetComment = ({ pid }) => {
-        const comment = comments.filter(comment => comment.parent === pid)[0];
+    const GetPosts = async (e) => {
+        const pid = posts[posts.length - 1].id;
+        let data = [];
 
+        try {
+            const res = await fetch(`/more-posts?pid=${pid}`);
+            data = await res.json();
+
+            const newPosts = [...posts, ...data]
+
+            setPosts(newPosts);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const GetComment = () => {
+        const comment = comments.filter(comment => comment.parent === pid)[0];
 
         if (comment) {
             return (
@@ -69,6 +84,9 @@ const ListPosts = () => {
                             </div>
                         )
                     })}
+            </div>
+            <div className="btn-load">
+                <button onClick={e => GetPosts(e)}>More Threads</button>
             </div>
         </>
     )

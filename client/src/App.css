@@ -33,6 +33,12 @@ body {
   margin: auto;
 }
 
+.btn-load {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
 button {
   color: var(--primary);
   background-color: var(--secondary);

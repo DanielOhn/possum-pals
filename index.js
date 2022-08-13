@@ -81,7 +81,7 @@ app.get('/posts/:id', async (req, res) => {
 // Get all posts
 app.get('/posts', async (req, res) => {
     try {
-        const allPosts = await pool.query("SELECT * FROM posts ORDER BY updated DESC");
+        const allPosts = await pool.query("SELECT * FROM posts ORDER BY updated DESC LIMIT 4");
         const comments = await pool.query("SELECT DISTINCT ON (parent) id, text, created, parent, file FROM comments");
 
         const result = {posts: allPosts.rows, comments: comments.rows}
@@ -91,9 +91,23 @@ app.get('/posts', async (req, res) => {
     }
 })
 
+app.get('/more-posts', async (req, res) => {
+    const { pid } = req.query;
+    console.log(pid);
+
+    try {
+        const allPosts = await pool.query(`WITH init AS (SELECT updated FROM posts WHERE id = ${pid}) SELECT posts.* FROM posts, init WHERE posts.updated < init.updated ORDER BY updated DESC LIMIT 4`);
+        const result = allPosts.rows
+
+        res.json(result);
+    } catch (err) {
+        console.log(err.message);
+    }
+})
+
 // Comments Routes
 // Create Comment
-app.post('/comments', async (req, res) => {
+app.post('/comments', async (req, res) => {    
     try {
         const { text, file, parent } = req.body;
 
@@ -111,7 +125,7 @@ app.post('/comments', async (req, res) => {
 
 // List Comments
 app.get('/comments/:id', async (req, res) => {
-    try {
+    try {   
         const { id } = req.params;
 
         const allComments = await pool.query("SELECT * FROM comments WHERE parent = $1", [id]);
