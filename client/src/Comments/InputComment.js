@@ -77,7 +77,7 @@ const InputComment = () => {
             <form onSubmit={onSubmitForm} className="post-input">
                 <textarea placeholder="Add some text..." type="text" value={text} onChange={(e) => setText(e.target.value)} />
                 <input type="file" accept=".jpg, .jpeg, .png" onChange={(e) => handleFile(e)} />
-                <button disabled={disabled}>Add Comment</button>
+                <button role="tab" tabindex="0" disabled={disabled}>Add Comment</button>
             </form>
         </>
     )

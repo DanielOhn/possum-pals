@@ -76,7 +76,7 @@ const ListPosts = ({pid}) => {
                                         </div>
                                         <div className="small-deets">
                                             <small>{post.created}</small>
-                                            <Link to={`/p/${post.id}`}><small role="tab" tabindex="0">[View]</small></Link>
+                                            <Link to={`/p/${post.id}`}><small>[View]</small></Link>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@ const ListPosts = ({pid}) => {
                     })}
             </div>
             <div className="btn-load">
-                <button onClick={e => GetPosts(e)}>More Threads</button>
+                <button role="tab" tabindex="0" onClick={e => GetPosts(e)}>More Threads</button>
             </div>
         </>
     )
