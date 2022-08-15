@@ -23,8 +23,8 @@ const ListPosts = ({pid}) => {
             console.error(err);
         }
     }
-
-    const GetComment = () => {
+    
+    const GetComment = ({pid}) => {
         const comment = comments.filter(comment => comment.parent === pid)[0];
 
         if (comment) {

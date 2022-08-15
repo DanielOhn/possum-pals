@@ -91,6 +91,7 @@ app.get('/posts', async (req, res) => {
     }
 })
 
+// Used for Endless Scrolling.  Loads more posts on main page.
 app.get('/more-posts', async (req, res) => {
     const { pid } = req.query;
     console.log(pid);
@@ -124,6 +125,7 @@ app.post('/comments', async (req, res) => {
 })
 
 // List Comments
+// Getting all the comments for a specific post
 app.get('/comments/:id', async (req, res) => {
     try {   
         const { id } = req.params;
