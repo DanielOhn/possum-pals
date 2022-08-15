@@ -14,8 +14,6 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/p/:id" element={<SinglePost />} />
       </Routes>
-
-
     </BrowserRouter>
   );
 }

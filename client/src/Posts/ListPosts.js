@@ -62,7 +62,7 @@ const ListPosts = ({pid}) => {
 
     return (
         <>
-            <div className="posts">
+            <div className="posts" rol="tablist">
                 {loading ? <p>Loading threads...</p> :
                     posts.map((post) => {
                         return (
@@ -76,7 +76,7 @@ const ListPosts = ({pid}) => {
                                         </div>
                                         <div className="small-deets">
                                             <small>{post.created}</small>
-                                            <Link to={`/p/${post.id}`}><small>[View]</small></Link>
+                                            <Link to={`/p/${post.id}`}><small role="tab" tabindex="0">[View]</small></Link>
                                         </div>
                                     </div>
                                 </div>

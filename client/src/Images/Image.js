@@ -13,7 +13,7 @@ const Image = ({alt, file}) => {
     
     return (
         <div className={image}>
-            <img onClick={(e) => onClick(e)} alt={alt} src={file} />
+            <img role="tab" tabindex="0" onClick={(e) => onClick(e)} alt={alt} src={file} />
         </div>
     )
 }
